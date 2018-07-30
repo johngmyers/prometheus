@@ -960,17 +960,17 @@ loop:
 				ok = false
 			case storage.ErrOutOfOrderSample:
 				numOutOfOrder++
-				level.Debug(sl.l).Log("msg", "Out of order sample", "series", string(met))
+				level.Debug(sl.l).Log("msg", "Out of order sample", "series", string(met), "timestamp", t, "value", v)
 				targetScrapeSampleOutOfOrder.Inc()
 				continue
 			case storage.ErrDuplicateSampleForTimestamp:
 				numDuplicates++
-				level.Debug(sl.l).Log("msg", "Duplicate sample for timestamp", "series", string(met))
+				level.Debug(sl.l).Log("msg", "Duplicate sample for timestamp", "series", string(met), "timestamp", t, "value", v)
 				targetScrapeSampleDuplicate.Inc()
 				continue
 			case storage.ErrOutOfBounds:
 				numOutOfBounds++
-				level.Debug(sl.l).Log("msg", "Out of bounds metric", "series", string(met))
+				level.Debug(sl.l).Log("msg", "Out of bounds metric", "series", string(met), "timestamp", t, "value", v)
 				targetScrapeSampleOutOfBounds.Inc()
 				continue
 			case errSampleLimit:
